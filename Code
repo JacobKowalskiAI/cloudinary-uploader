@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Uploader do Cloudinary</title>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+</head>
+<body style="text-align: center; font-family: sans-serif; padding-top: 30px;">
+  <h2>📸 Wgraj swoje zdjęcie</h2>
+  <button id="upload_widget">Prześlij zdjęcie</button>
+  <p id="uploaded_url" style="margin-top: 20px;"></p>
+
+  <script type="text/javascript">
+    var myWidget = cloudinary.createUploadWidget({
+      cloudName: 'dkqfdzcv9',
+      uploadPreset: 'temp_upload'
+    }, (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log('Zdjęcie załadowane:', result.info.secure_url);
+        document.getElementById("uploaded_url").innerHTML =
+          '🔗 Link do zdjęcia:<br><a href="' + result.info.secure_url + '" target="_blank">' + result.info.secure_url + '</a>';
+      }
+    });
+
+    document.getElementById("upload_widget").addEventListener("click", function () {
+      myWidget.open();
+    }, false);
+  </script>
+</body>
+</html>
