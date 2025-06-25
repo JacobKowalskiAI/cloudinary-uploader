@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cloudinary Upload Widget</title>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+</head>
+<body style="text-align: center; font-family: sans-serif; padding-top: 30px;">
+  <h2>📸 Upload your photo</h2>
+  <button id="upload_widget">Upload Image</button>
+  <p id="uploaded_url" style="margin-top: 20px;"></p>
+
+  <script type="text/javascript">
+    var myWidget = cloudinary.createUploadWidget({
+      cloudName: 'dkqfdzcv9',
+      uploadPreset: 'temp_upload'
+    }, (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log('Uploaded image:', result.info.secure_url);
+        document.getElementById("uploaded_url").innerHTML =
+          '🔗 Image link:<br><a href="' + result.info.secure_url + '" target="_blank">' + result.info.secure_url + '</a>';
+      }
+    });
+
+    document.getElementById("upload_widget").addEventListener("click", function () {
+      myWidget.open();
+    }, false);
+  </script>
+</body>
+</html>
